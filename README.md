@@ -20,7 +20,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open **http://localhost:5000** in your browser.
+Open **(https://ai-powered-talent-scouting-engagement-pzen.onrender.com)** in your browser.
 
 ---
 
