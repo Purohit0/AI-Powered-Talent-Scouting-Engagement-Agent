@@ -3,468 +3,782 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Talent Scout - Smart Candidate Engagement</title>
+    <title>AI Talent Scout | Smart Candidate Engagement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #14b8a6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Outfit', sans-serif;
+            background: #0f172a;
             min-height: 100vh;
-            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(20, 184, 166, 0.1) 0%, transparent 40%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+        
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(5%, 5%) rotate(5deg); }
+            66% { transform: translate(-5%, 3%) rotate(-3deg); }
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(99, 102, 241, 0.3);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(236, 72, 153, 0.25);
+            bottom: 20%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+        
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: rgba(20, 184, 166, 0.2);
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
         
+        /* Header */
         header {
             text-align: center;
-            color: white;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 10px 60px rgba(99, 102, 241, 0.6); }
         }
         
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
         }
         
         header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 300;
         }
         
+        /* Steps Indicator */
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
+            border-color: rgba(99, 102, 241, 0.5);
+            color: #fff;
+            box-shadow: 0 5px 30px rgba(99, 102, 241, 0.3);
+        }
+        
+        .step.completed {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.1));
+            border-color: rgba(20, 184, 166, 0.5);
+            color: #14b8a6;
+        }
+        
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .step.active .step-num {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .step.completed .step-num {
+            background: var(--accent);
+        }
+        
+        /* Cards */
         .card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 0.8s ease-out both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
         }
         
         .card h2 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: 600;
         }
         
-        .card h2 .icon {
-            font-size: 1.5rem;
-        }
-        
+        /* Input Area */
         textarea {
             width: 100%;
-            min-height: 200px;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 14px;
+            min-height: 220px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--glass-border);
+            border-radius: 16px;
+            font-size: 15px;
+            color: #fff;
             resize: vertical;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+        
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
         }
         
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
         }
         
         .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 16px;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 15px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Outfit', sans-serif;
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.4);
         }
         
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .btn:active {
+            transform: translateY(-1px);
         }
         
-        .btn-secondary {
-            background: #6c757d;
-        }
-        
+        /* Loading */
         .loading {
             text-align: center;
-            padding: 40px;
-            color: #666;
+            padding: 60px 20px;
+            display: none;
         }
         
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
+        .loading.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .spinner-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+        }
+        
+        .spinner-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
             border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+        
+        .spinner-ring:nth-child(1) {
+            border-top-color: var(--primary);
+            animation-delay: 0s;
+        }
+        
+        .spinner-ring:nth-child(2) {
+            border-right-color: var(--secondary);
+            animation-delay: 0.2s;
+            width: 60px;
+            height: 60px;
+            top: 10px;
+            left: 10px;
+        }
+        
+        .spinner-ring:nth-child(3) {
+            border-bottom-color: var(--accent);
+            animation-delay: 0.4s;
             width: 40px;
             height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
+            top: 20px;
+            left: 20px;
         }
         
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
         
+        .loading p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+        
+        /* Results */
         .results {
             display: none;
         }
         
-        .results.visible {
+        .results.active {
             display: block;
+            animation: fadeInUp 0.8s ease-out;
         }
         
+        /* JD Summary */
         .jd-summary {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .jd-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .jd-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
             margin-bottom: 20px;
         }
         
-        .jd-summary h3 {
-            color: #333;
-            margin-bottom: 15px;
+        .jd-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
         }
         
-        .jd-tags {
+        .jd-meta-icon {
+            font-size: 1.1rem;
+        }
+        
+        .jd-skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
+            gap: 10px;
         }
         
-        .jd-tag {
-            background: #667eea;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 12px;
+        .skill-tag {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(99, 102, 241, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            color: #a5b4fc;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
         
+        /* Candidate Cards */
         .candidate-card {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .candidate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .candidate-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(5px);
+        }
+        
+        .candidate-card:hover::before {
+            opacity: 1;
         }
         
         .candidate-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 15px;
-        }
-        
-        .candidate-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .candidate-role {
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 3px;
-        }
-        
-        .rank-badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .scores {
-            display: flex;
-            gap: 15px;
-            margin: 15px 0;
-        }
-        
-        .score-box {
-            flex: 1;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .score-box.match {
-            background: #e8f5e9;
-        }
-        
-        .score-box.interest {
-            background: #fff3e0;
-        }
-        
-        .score-box.combined {
-            background: #e3f2fd;
-        }
-        
-        .score-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .score-box.match .score-value {
-            color: #071608;
-        }
-        
-        .score-box.interest .score-value {
-            color: #f57c00;
-        }
-        
-        .score-box.combined .score-value {
-            color: #1565c0;
-        }
-        
-        .score-label {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .status-badge.hot {
-            background: #ffebee;
-            color: #c62828;
-        }
-        
-        .status-badge.warm {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-        
-        .status-badge.cold {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-        
-        .explanation {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: #555;
-            margin: 15px 0;
-            border-left: 3px solid #667eea;
-        }
-        
-        .conversation {
-            background: #f0f4f8;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-        
-        .conversation h4 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-        
-        .message {
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .message.outreach {
-            background: #e8f5e9;
-            border-left: 3px solid #4caf50;
-        }
-        
-        .message.response {
-            background: #e3f2fd;
-            border-left: 3px solid #2196f3;
-        }
-        
-        .message-label {
-            font-size: 0.75rem;
-            color: #888;
-            margin-bottom: 5px;
-        }
-        
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 10px;
-        }
-        
-        .skill-tag {
-            background: #f0f0f0;
-            color: #555;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
-        
-        .matched-skill {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-        
-        .missing-skill {
-            background: #ffebee;
-            color: #c62828;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .btn-small {
-            padding: 8px 20px;
-            font-size: 14px;
-        }
-        
-        .steps-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
             margin-bottom: 20px;
         }
         
-        .step {
+        .candidate-info h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .candidate-role {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+        
+        .candidate-location {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #999;
-            font-size: 0.9rem;
+            gap: 5px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            margin-top: 8px;
         }
         
-        .step.active {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .step.completed {
-            color: #4caf50;
-        }
-        
-        .step-number {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: #e0e0e0;
+        .rank-badge {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Scores */
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .score-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .score-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .score-card.match .score-value { color: #22c55e; }
+        .score-card.interest .score-value { color: #f59e0b; }
+        .score-card.combined .score-value { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .score-label {
+            color: rgba(255, 255, 255, 0.5);
             font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .step.active .step-number {
-            background: #667eea;
-            color: white;
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .step.completed .step-number {
-            background: #4caf50;
-            color: white;
+        .status-badge.hot {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+        
+        .status-badge.warm {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #f59e0b;
+        }
+        
+        .status-badge.cold {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #3b82f6;
+        }
+        
+        /* Explanation */
+        .explanation {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            border-left: 3px solid var(--primary);
+        }
+        
+        /* Skills */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .skill-pill {
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .skill-pill.matched {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+        
+        .skill-pill.missing {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+        
+        /* Conversation */
+        .conversation {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .conversation h4 {
+            color: #fff;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .message {
+            padding: 15px 18px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .message.outreach {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .message.response {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .msg-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            opacity: 0.6;
+        }
+        
+        /* Section Title */
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--glass-border), transparent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .steps { flex-wrap: wrap; gap: 10px; }
+            .step { padding: 10px 16px; font-size: 0.8rem; }
+            .scores-grid { grid-template-columns: 1fr; }
+            .candidate-header { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    
     <div class="container">
         <header>
-            <h1>🤖 AI Talent Scout</h1>
+            <div class="logo">
+                <div class="logo-icon">🤖</div>
+            </div>
+            <h1>AI Talent Scout</h1>
             <p>Smart Candidate Discovery & Engagement</p>
         </header>
         
-        <div class="steps-indicator">
+        <div class="steps">
             <div class="step active" id="step1">
-                <span class="step-number">1</span>
+                <span class="step-num">1</span>
                 <span>Input JD</span>
             </div>
             <div class="step" id="step2">
-                <span class="step-number">2</span>
-                <span>Match Candidates</span>
+                <span class="step-num">2</span>
+                <span>Match</span>
             </div>
             <div class="step" id="step3">
-                <span class="step-number">3</span>
+                <span class="step-num">3</span>
                 <span>Engage & Rank</span>
             </div>
         </div>
         
         <div class="card">
-            <h2><span class="icon">📋</span> Paste Job Description</h2>
-            <textarea id="jdInput" placeholder="Paste your job description here...
+            <div class="card-header">
+                <div class="card-icon">📋</div>
+                <h2>Paste Your Job Description</h2>
+            </div>
+            <textarea id="jdInput" placeholder="Enter job description here...
 
 Example:
-Software Engineer
+Senior Python Developer
 Location: Bangalore
-Experience: 3-5 years
+Experience: 4-6 years
 
 Required Skills:
-- Python, Django, React
+- Python, Django, Flask
+- React, JavaScript
 - AWS, Docker
-- SQL, MongoDB
+- PostgreSQL, MongoDB
 
 Responsibilities:
 - Build scalable web applications
-- Collaborate with cross-functional teams
-- Mentor junior developers
-
-Education: B.Tech or equivalent"></textarea>
-            <button class="btn" onclick="processJD()">🔍 Find & Engage Candidates</button>
+- Lead technical projects
+- Mentor junior developers"></textarea>
+            <button class="btn" onclick="processJD()">
+                <span>🔍</span> Find & Engage Candidates
+            </button>
         </div>
         
-        <div id="loading" class="card" style="display: none;">
-            <div class="loading">
-                <div class="spinner"></div>
-                <p>Analyzing job description and matching candidates...</p>
+        <div id="loading" class="loading">
+            <div class="spinner-container">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
             </div>
+            <p>Analyzing job description & matching candidates...</p>
         </div>
         
         <div id="results" class="results">
             <div class="card">
-                <h2><span class="icon">📊</span> JD Analysis</h2>
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <h2>JD Analysis</h2>
+                </div>
                 <div class="jd-summary" id="jdSummary"></div>
             </div>
             
-            <div class="card">
-                <h2><span class="icon">🏆</span> Ranked Candidate Shortlist</h2>
-                <div id="candidatesList"></div>
-            </div>
+            <h3 class="section-title">🏆 Ranked Candidates</h3>
+            <div id="candidatesList"></div>
         </div>
     </div>
     
@@ -478,8 +792,8 @@ Education: B.Tech or equivalent"></textarea>
             }
             
             // Show loading
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('results').classList.remove('visible');
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('results').classList.remove('active');
             
             // Update steps
             document.getElementById('step1').classList.remove('active');
@@ -489,18 +803,13 @@ Education: B.Tech or equivalent"></textarea>
             try {
                 const response = await fetch('/api/full-process', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ jd_text: jdText })
                 });
                 
                 const data = await response.json();
                 
-                // Display JD summary
                 displayJDAnalysis(data.parsed_jd);
-                
-                // Display candidates
                 displayCandidates(data.ranked_candidates);
                 
                 // Update steps
@@ -509,13 +818,16 @@ Education: B.Tech or equivalent"></textarea>
                 document.getElementById('step3').classList.add('active');
                 
                 // Show results
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('results').classList.add('visible');
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('results').classList.add('active');
+                
+                // Scroll to results
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
                 
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred. Please try again.');
-                document.getElementById('loading').style.display = 'none';
+                document.getElementById('loading').classList.remove('active');
             }
         }
         
@@ -523,12 +835,23 @@ Education: B.Tech or equivalent"></textarea>
             const summary = document.getElementById('jdSummary');
             
             let html = `
-                <h3>${parsed.title || 'Job Position'}</h3>
-                <p><strong>Location:</strong> ${parsed.location || 'Not specified'}</p>
-                <p><strong>Experience Required:</strong> ${parsed.experience_required ? parsed.experience_required + ' years' : 'Not specified'}</p>
-                <p><strong>Education:</strong> ${parsed.education.join(', ')}</p>
-                <div class="jd-tags">
-                    ${parsed.skills.map(skill => `<span class="jd-tag">${skill}</span>`).join('')}
+                <h3 class="jd-title">${parsed.title || 'Job Position'}</h3>
+                <div class="jd-meta">
+                    <div class="jd-meta-item">
+                        <span class="jd-meta-icon">📍</span>
+                        <span>${parsed.location || 'Not specified'}</span>
+                    </div>
+                    <div class="jd-meta-item">
+                        <span class="jd-meta-icon">⏱️</span>
+                        <span>${parsed.experience_required ? parsed.experience_required + ' years' : 'Not specified'}</span>
+                    </div>
+                    <div class="jd-meta-item">
+                        <span class="jd-meta-icon">🎓</span>
+                        <span>${parsed.education.join(', ')}</span>
+                    </div>
+                </div>
+                <div class="jd-skills">
+                    ${parsed.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
                 </div>
             `;
             
@@ -547,52 +870,48 @@ Education: B.Tech or equivalent"></textarea>
                 html += `
                     <div class="candidate-card">
                         <div class="candidate-header">
-                            <div>
-                                <div class="candidate-name">${candidate.name}</div>
+                            <div class="candidate-info">
+                                <h3>${candidate.name}</h3>
                                 <div class="candidate-role">${candidate.current_role} at ${candidate.company}</div>
-                                <div style="margin-top: 5px; font-size: 0.85rem; color: #666;">
-                                    📍 ${candidate.location} | 💼 ${candidate.experience_years} years | 📧 ${candidate.email}
+                                <div class="candidate-location">
+                                    <span>📍</span> ${candidate.location} · ${candidate.experience_years} yrs exp
                                 </div>
                             </div>
                             <div class="rank-badge">#${rank}</div>
                         </div>
                         
-                        <div class="scores">
-                            <div class="score-box match">
+                        <div class="scores-grid">
+                            <div class="score-card match">
                                 <div class="score-value">${candidate.match_score}%</div>
                                 <div class="score-label">Match Score</div>
                             </div>
-                            <div class="score-box interest">
+                            <div class="score-card interest">
                                 <div class="score-value">${candidate.interest_score}%</div>
                                 <div class="score-label">Interest Score</div>
                             </div>
-                            <div class="score-box combined">
+                            <div class="score-card combined">
                                 <div class="score-value">${candidate.combined_score}%</div>
                                 <div class="score-label">Combined</div>
                             </div>
                         </div>
                         
-                        <div>
-                            <span class="status-badge ${statusClass}">${candidate.engagement_status}</span>
-                        </div>
+                        <span class="status-badge ${statusClass}">${candidate.engagement_status}</span>
                         
-                        <div class="explanation">
-                            ${candidate.explanation}
-                        </div>
+                        <div class="explanation">${candidate.explanation}</div>
                         
                         <div class="skills-list">
-                            ${candidate.matched_skills.map(skill => `<span class="skill-tag matched-skill">✓ ${skill}</span>`).join('')}
-                            ${candidate.missing_skills.slice(0, 3).map(skill => `<span class="skill-tag missing-skill">✗ ${skill}</span>`).join('')}
+                            ${candidate.matched_skills.map(skill => `<span class="skill-pill matched">✓ ${skill}</span>`).join('')}
+                            ${candidate.missing_skills.slice(0, 3).map(skill => `<span class="skill-pill missing">✗ ${skill}</span>`).join('')}
                         </div>
                         
                         <div class="conversation">
                             <h4>💬 Engagement Conversation</h4>
                             <div class="message outreach">
-                                <div class="message-label">Recruiter Message:</div>
+                                <div class="msg-label">Recruiter</div>
                                 ${candidate.conversation.initial_message}
                             </div>
                             <div class="message response">
-                                <div class="message-label">Candidate Response:</div>
+                                <div class="msg-label">Candidate</div>
                                 ${candidate.candidate_response}
                             </div>
                         </div>

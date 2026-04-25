@@ -3,6 +3,7 @@ AI-Powered Talent Scouting Engagement Agent
 Main Flask Application
 """
 
+import os
 from flask import Flask, render_template, request, jsonify
 import json
 from jd_parser import JDParser
@@ -11,6 +12,9 @@ from engagement_agent import EngagementAgent
 from candidates import get_candidates
 
 app = Flask(__name__)
+
+# Production configuration
+app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
 
 # Initialize components
 jd_parser = JDParser()
