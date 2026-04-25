@@ -1,6 +1,5 @@
 # AI-Powered-Talent-Scouting-Engagement-Agent
-
-Recruiters spend hours sifting through profiles and chasing candidate interest. This AI agent takes a Job Description as input, discovers matching candidates, engages them conversationally to assess genuine interest, and outputs a ranked shortlist scored on two dimensions: Match Score and Interest Score.
+This AI-powered talent scouting agent automates the recruitment process by intelligently matching candidates to a given job description. It begins by parsing the job requirements to extract key skills, experience, and qualifications, then identifies suitable candidates from a database. The system further engages candidates through simulated conversations to evaluate their genuine interest in the role. Based on both technical alignment and engagement responses, each candidate is scored using Match Score and Interest Score. Finally, the agent generates a ranked shortlist, helping recruiters focus on the most relevant and interested candidates. This approach significantly reduces manual effort while improving hiring efficiency and decision quality.
 
 ---
 
