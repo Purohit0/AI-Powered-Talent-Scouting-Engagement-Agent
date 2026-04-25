@@ -20,7 +20,7 @@ python app.py
 ```
 
 Open **(https://ai-powered-talent-scouting-engagement-pzen.onrender.com)** in your browser.
-
+Note: It may take time to open:) 
 ---
 
 ## 📹 Demo Video
