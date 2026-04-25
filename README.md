@@ -32,7 +32,7 @@ Watch a 3-5 minute walkthrough demonstrating:
 - Conversational outreach simulation
 - Final ranked shortlist generation
 
-[Demo Video Link - (https://drive.google.com/file/d/1q1vA-GKT_LtuXWTNorPeLaPe1XB3yvtQ/view?usp=sharing)]
+[Demo Video Link - https://drive.google.com/file/d/1GEwXTJwdEagq21m9Yx783FdB3YHQnBgK/view?usp=sharing]
 
 ---
 
