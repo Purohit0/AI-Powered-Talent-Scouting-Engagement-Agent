@@ -4,7 +4,7 @@ Recruiters spend hours sifting through profiles and chasing candidate interest. 
 
 ---
 
-##  Working Prototype
+##  Working Model
 
 ### Local Setup Instructions
 
